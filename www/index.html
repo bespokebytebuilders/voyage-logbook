@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Voyage Logbook - Turn your dreams into adventures. Create your bucket list with maps, set goals, and journal your journey.">
+    <meta name="keywords" content="bucket list, travel journal, adventure planning, goal setting">
+    <title>Voyage Logbook - Turn Your Dreams Into Adventures</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1A385A;
+            --secondary-blue: #769ABE;
+            --accent-orange: #E46F44;
+            --earth-tone: #D7C6AC;
+            --background-cream: #F8F6F3;
+            --text-dark: #2D2D2D;
+            --text-light: #FFFFFF;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+            background: linear-gradient(135deg, rgba(26, 56, 90, 0.85) 0%, rgba(118, 154, 190, 0.7) 100%),
+                        url('https://user-gen-media-assets.s3.amazonaws.com/gemini_images/d0969ba7-7d8e-4202-84ce-ceebc5e51e84.png') center/cover no-repeat;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 40px 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            margin-bottom: 24px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subheadline {
+            font-size: 24px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 48px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-orange);
+            color: var(--text-light);
+            box-shadow: 0 4px 15px rgba(228, 111, 68, 0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: #d25e35;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(228, 111, 68, 0.5);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-heading {
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--primary-blue);
+        }
+
+        /* Value Proposition Section */
+        .value-prop {
+            background-color: var(--text-light);
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .value-item {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        .value-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .value-item img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+
+        .value-item h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: var(--primary-blue);
+        }
+
+        .value-item p {
+            font-size: 17px;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: var(--background-cream);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .feature-card {
+            background-color: var(--text-light);
+            padding: 40px 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card img {
+            width: 90px;
+            height: 90px;
+            margin-bottom: 24px;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: var(--primary-blue);
+        }
+
+        .feature-card p {
+            font-size: 16px;
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background-color: var(--text-light);
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .steps-container::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: linear-gradient(to right, var(--secondary-blue), var(--accent-orange));
+            z-index: 0;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-orange), #f58a61);
+            color: var(--text-light);
+            font-size: 42px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            box-shadow: 0 4px 15px rgba(228, 111, 68, 0.3);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .step h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--primary-blue);
+        }
+
+        .step p {
+            font-size: 15px;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Social Proof Section */
+        .social-proof {
+            background: linear-gradient(135deg, #e8f4f8 0%, var(--background-cream) 100%);
+        }
+
+        .stat {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .stat h2 {
+            font-size: 48px;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .testimonial-card {
+            background-color: var(--text-light);
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .stars {
+            color: #FFC107;
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-card blockquote {
+            font-style: italic;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--accent-orange));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .author-info {
+            text-align: left;
+        }
+
+        .author-name {
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 2px;
+        }
+
+        .author-location {
+            font-size: 14px;
+            color: var(--text-dark);
+            opacity: 0.7;
+        }
+
+        /* Final CTA Section */
+        .final-cta {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 48px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .final-cta-subheading {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .email-form {
+            max-width: 600px;
+            margin: 0 auto 20px;
+            display: flex;
+            gap: 0;
+            position: relative;
+        }
+
+        .email-input {
+            flex: 1;
+            padding: 18px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-family: 'Open Sans', sans-serif;
+            outline: none;
+        }
+
+        .email-input:focus {
+            box-shadow: 0 0 0 3px rgba(228, 111, 68, 0.3);
+        }
+
+        .btn-submit {
+            padding: 18px 36px;
+            background-color: var(--accent-orange);
+            color: var(--text-light);
+            border: none;
+            border-radius: 0 50px 50px 0;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-submit:hover {
+            background-color: #d25e35;
+        }
+
+        .privacy-text {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 20px;
+        }
+
+        .privacy-text a {
+            color: var(--text-light);
+            text-decoration: underline;
+        }
+
+        .form-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .form-message.success {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            border: 1px solid #4CAF50;
+            display: block;
+        }
+
+        .form-message.error {
+            background-color: rgba(244, 67, 54, 0.2);
+            color: #F44336;
+            border: 1px solid #F44336;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-left h3 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .footer-tagline {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-orange);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-subheadline {
+                font-size: 18px;
+            }
+
+            .btn {
+                padding: 14px 32px;
+                font-size: 16px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .section-heading {
+                font-size: 32px;
+                margin-bottom: 40px;
+            }
+
+            .value-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .steps-container {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .steps-container::before {
+                display: none;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .final-cta h2 {
+                font-size: 32px;
+            }
+
+            .final-cta-subheading {
+                font-size: 18px;
+            }
+
+            .email-form {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .email-input {
+                border-radius: 50px;
+                width: 100%;
+            }
+
+            .btn-submit {
+                border-radius: 50px;
+                width: 100%;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .footer-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .stat h2 {
+                font-size: 36px;
+            }
+        }
+
+        /* Accessibility */
+        .btn:focus,
+        .email-input:focus,
+        .btn-submit:focus {
+            outline: 3px solid var(--accent-orange);
+            outline-offset: 2px;
+        }
+
+        a:focus {
+            outline: 2px solid var(--accent-orange);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Turn Your Dreams Into Adventures</h1>
+            <p class="hero-subheadline">Create your bucket list with maps, set goals, and journal your journey</p>
+            <a href="#final-cta" class="btn btn-primary">Start Your Bucket List</a>
+        </div>
+    </section>
+
+    <!-- Value Proposition Section -->
+    <section class="value-prop">
+        <div class="container">
+            <h2 class="section-heading">Your Journey Starts Here</h2>
+            <div class="value-grid">
+                <div class="value-item" data-animate>
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/828e1058-81cd-421c-b68b-c3476bb0417a.png" alt="Map icon">
+                    <h3>Pick Dream Destinations</h3>
+                    <p>Visualize your bucket list destinations with interactive maps. See all the places you want to explore plotted beautifully on your personalized world map.</p>
+                </div>
+                <div class="value-item" data-animate>
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/af5d20ec-f220-4045-9174-955b30cc3acc.png" alt="Goals icon">
+                    <h3>Set Actionable Goals</h3>
+                    <p>Transform vague wishes into concrete plans with timelines. Track your progress and turn dreams into achievable milestones with target dates.</p>
+                </div>
+                <div class="value-item" data-animate>
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/ca4fd4a0-2c76-4a60-928e-3f5dde4afddd.png" alt="Journal icon">
+                    <h3>Journal Your Experiences</h3>
+                    <p>Document every adventure as they happen with guided prompts. Reflect on your experiences, preserve memories, and relive the magic of your journeys.</p>
+                </div>
+                <div class="value-item" data-animate>
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/ca4fd4a0-2c76-4a60-928e-3f5dde4afddd.png" alt="Print icon">
+                    <h3>Order Printed Logbook</h3>
+                    <p>Get your personalized bucket list and journal in a beautifully crafted printed logbook. Durable, elegant, and uniquely yours to treasure forever.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-heading">Everything You Need to Dream Big</h2>
+            <div class="features-grid">
+                <div class="feature-card" data-animate>
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/828e1058-81cd-421c-b68b-c3476bb0417a.png" alt="Map Your Dreams">
+                    <h3>Map Your Dreams</h3>
+                    <p>Visualize your bucket list destinations with interactive maps powered by OpenStreetMap. See the world you want to explore.</p>
+                </div>
+                <div class="feature-card" data-animate>
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/af5d20ec-f220-4045-9174-955b30cc3acc.png" alt="Set Your Goals">
+                    <h3>Set Your Goals</h3>
+                    <p>Turn vague wishes into concrete plans. Add target dates, track progress, and make your dreams actionable.</p>
+                </div>
+                <div class="feature-card" data-animate>
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/ca4fd4a0-2c76-4a60-928e-3f5dde4afddd.png" alt="Capture Your Journey">
+                    <h3>Capture Your Journey</h3>
+                    <p>Document every adventure with guided journal prompts and custom pages. Reflect, remember, and relive your experiences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-heading">Four Simple Steps</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Brainstorm Your Bucket List</h3>
+                    <p>Start with dreams big and small. What experiences will make your life extraordinary?</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Add Locations &amp; See Them Mapped</h3>
+                    <p>Select destinations and watch them come alive on your personalized world map.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Set Goal Dates</h3>
+                    <p>Choose when you want to achieve each dream. Make them real with deadlines.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Order Your Printed Logbook</h3>
+                    <p>Get your custom journal delivered. Beautiful, durable, and uniquely yours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="social-proof">
+        <div class="container">
+            <div class="stat">
+                <h2>Join 1,000+ Dreamers</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <blockquote>"This journal changed how I think about my goals. Seeing them on a map made everything feel possible!"</blockquote>
+                    <div class="testimonial-author">
+                        <div class="avatar">SM</div>
+                        <div class="author-info">
+                            <div class="author-name">Sarah M.</div>
+                            <div class="author-location">Portland</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <blockquote>"I've always had a bucket list in my head. Now it's beautifully organized and I'm actually checking things off."</blockquote>
+                    <div class="testimonial-author">
+                        <div class="avatar">JT</div>
+                        <div class="author-info">
+                            <div class="author-name">James T.</div>
+                            <div class="author-location">Austin</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <blockquote>"The printed logbook is stunning. It's part planner, part coffee table book. I show it to everyone!"</blockquote>
+                    <div class="testimonial-author">
+                        <div class="avatar">ML</div>
+                        <div class="author-info">
+                            <div class="author-name">Maria L.</div>
+                            <div class="author-location">Barcelona</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta" id="final-cta">
+        <div class="container">
+            <h2>Create My Free Bucket List</h2>
+            <p class="final-cta-subheading">Start planning your adventures today. No credit card required.</p>
+            <form class="email-form" id="emailForm" novalidate>
+                <input 
+                    type="email" 
+                    class="email-input" 
+                    placeholder="Enter your email" 
+                    id="emailInput"
+                    required
+                    aria-label="Email address"
+                >
+                <button type="submit" class="btn-submit">Get Started</button>
+            </form>
+            <div class="form-message" id="formMessage" role="alert"></div>
+            <p class="privacy-text">We respect your privacy. <a href="#privacy">Unsubscribe anytime.</a></p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <h3>Voyage Logbook</h3>
+                    <p class="footer-tagline">Turn Dreams Into Adventures</p>
+                </div>
+                <nav class="footer-links" aria-label="Footer navigation">
+                    <a href="#about">About</a>
+                    <a href="#privacy">Privacy</a>
+                    <a href="#terms">Terms</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Voyage Logbook. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('[data-animate]').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Email form validation and submission
+        const emailForm = document.getElementById('emailForm');
+        const emailInput = document.getElementById('emailInput');
+        const formMessage = document.getElementById('formMessage');
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function showMessage(message, type) {
+            formMessage.textContent = message;
+            formMessage.className = `form-message ${type}`;
+            formMessage.style.display = 'block';
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    formMessage.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        emailForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const email = emailInput.value.trim();
+            
+            if (!email) {
+                showMessage('Please enter your email address.', 'error');
+                emailInput.focus();
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                showMessage('Please enter a valid email address.', 'error');
+                emailInput.focus();
+                return;
+            }
+            
+            // Simulate successful submission
+            showMessage('Check your inbox! Your bucket list journey begins now.', 'success');
+            emailInput.value = '';
+        });
+
+        // Clear error message when user starts typing
+        emailInput.addEventListener('input', () => {
+            if (formMessage.classList.contains('error')) {
+                formMessage.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
