@@ -21,7 +21,14 @@
     <header class="app-header">
         <div class="header-content">
             <h1 class="logo">Voyage Logbook</h1>
-            <a href="../index.html" class="back-link">← Back to Home</a>
+            <div class="header-actions">
+                <div class="user-pill" id="user-pill" hidden>
+                    <span class="user-pill-label">Signed in as</span>
+                    <span class="user-pill-email" id="user-email-text"></span>
+                    <button type="button" class="pill-btn" id="clear-email-btn" aria-label="Clear saved email">×</button>
+                </div>
+                <a href="../index.html" class="back-link">← Back to Home</a>
+            </div>
         </div>
     </header>
 

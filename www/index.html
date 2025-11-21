@@ -789,6 +789,9 @@
     </footer>
 
     <script>
+        const EMAIL_STORAGE_KEY = 'voyageUserEmail';
+        const APP_ENTRY_PATH = 'app/index.html';
+
         // Scroll animations
         const observerOptions = {
             threshold: 0.2,
@@ -846,9 +849,13 @@
                 return;
             }
             
-            // Simulate successful submission
-            showMessage('Check your inbox! Your bucket list journey begins now.', 'success');
-            emailInput.value = '';
+            try {
+                localStorage.setItem(EMAIL_STORAGE_KEY, email);
+            } catch (error) {
+                console.warn('Unable to store email locally:', error);
+            }
+
+            window.location.href = APP_ENTRY_PATH;
         });
 
         // Clear error message when user starts typing

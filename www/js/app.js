@@ -1,5 +1,7 @@
 // Bucket List Builder - app/js/app.js
 
+const USER_EMAIL_STORAGE_KEY = 'voyageUserEmail';
+
 // State management
 let bucketList = [];
 let currentEditId = null;
@@ -11,6 +13,7 @@ let currentSort = 'date';
 
 // Initialize app
 document.addEventListener('DOMContentLoaded', function() {
+    hydrateUserEmailPill();
     initializeMap();
     loadItemsFromStorage();
     attachEventListeners();
@@ -389,6 +392,34 @@ function updateStats() {
 // Handle export
 function handleExport() {
     alert('Export functionality will be integrated with Lulu API for printing your custom logbook!');
+}
+
+// Display stored email if present
+function hydrateUserEmailPill() {
+    const pill = document.getElementById('user-pill');
+    const emailEl = document.getElementById('user-email-text');
+    const clearBtn = document.getElementById('clear-email-btn');
+
+    if (!pill || !emailEl || !clearBtn) {
+        return;
+    }
+
+    const storedEmail = localStorage.getItem(USER_EMAIL_STORAGE_KEY);
+
+    if (storedEmail) {
+        emailEl.textContent = storedEmail;
+        pill.removeAttribute('hidden');
+    } else {
+        pill.setAttribute('hidden', 'hidden');
+    }
+
+    if (!clearBtn.dataset.bound) {
+        clearBtn.addEventListener('click', () => {
+            localStorage.removeItem(USER_EMAIL_STORAGE_KEY);
+            pill.setAttribute('hidden', 'hidden');
+        });
+        clearBtn.dataset.bound = 'true';
+    }
 }
 
 // Initialize markers for loaded items
