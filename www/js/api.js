@@ -1,6 +1,6 @@
 // API Client for Voyage Logbook
 // Update this URL when deploying to production
-const API_URL = 'https://voyage-logbook.onrender.com';
+const API_URL = 'www/js/api.js';
 
 // Get stored auth token
 function getToken() {
